@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'task/index'
+
+  get 'task/create'
+
+  get 'task/new'
+
   devise_for :users
   get 'pages/home'
 
