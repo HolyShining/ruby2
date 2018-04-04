@@ -69,6 +69,6 @@ class DeliversController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def deliver_params
-      params.require(:deliver).permit(:name, :address, :objectlist, :delivers)
+      params.require(:deliver).permit(:name, :address, :objectlist, :is_deliverd)
     end
 end
