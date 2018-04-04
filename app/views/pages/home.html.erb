@@ -15,16 +15,18 @@
           <p><%= deliver.address %></p>
         </div>
         <div class="card-action">
-          <a href="#">Done</a>
+          <%= link_to 'Done', delivers_done_path("id"=>deliver), method: :post %>
+          <!--<%= link_to 'Done', :controller => 'delivers', :action => 'done', :item => deliver%>-->
         </div>
       </div>
     </div>
     <% end %>
 </div>
+<%= render "shared/floating_button"%>
 <% else %>
 <div class="row">
     <div class="col s12 m6">
-      <div class="card red accent-4 darken-1">
+      <div class="card red accent-2 darken-1">
         <div class="card-content white-text">
           <span class="card-title">Error!</span>
           <p>You need login before action</p>
@@ -37,4 +39,4 @@
   </div>
 <% end %>
 
-<%= render "shared/floating_button"%>
+

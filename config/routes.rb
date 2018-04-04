@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :delivers
   resources :samples
+  
+  root 'pages#home'
+
   get 'pages/about'
 
   get 'pages/location'
@@ -10,6 +13,8 @@ Rails.application.routes.draw do
   get 'task/create'
 
   get 'task/new'
+
+  post 'delivers/done'
 
   devise_for :users
   get 'pages/home'

@@ -1,5 +1,5 @@
 class DeliversController < ApplicationController
-  before_action :set_deliver, only: [:show, :edit, :update, :destroy]
+  before_action :set_deliver, only: [:show, :edit, :update, :destroy,:done]
 
   # GET /delivers
   # GET /delivers.json
@@ -42,6 +42,7 @@ class DeliversController < ApplicationController
   def update
     respond_to do |format|
       if @deliver.update(deliver_params)
+        Rails.logger.debug @deliver
         format.html { redirect_to @deliver, notice: 'Deliver was successfully updated.' }
         format.json { render :show, status: :ok, location: @deliver }
       else
@@ -59,6 +60,12 @@ class DeliversController < ApplicationController
       format.html { redirect_to delivers_url, notice: 'Deliver was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def done
+    Rails.logger.debug @deliver.is_deliverd
+    @deliver.is_deliverd = true
+    @deliver.save
   end
 
   private
