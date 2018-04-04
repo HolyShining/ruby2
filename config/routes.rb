@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :delivers
+  resources :samples
+  get 'pages/about'
+
+  get 'pages/location'
+
   get 'task/index'
 
   get 'task/create'

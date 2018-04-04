@@ -1,0 +1,37 @@
+<%= form_with(model: sample, local: true) do |form| %>
+  <% if sample.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(sample.errors.count, "error") %> prohibited this sample from being saved:</h2>
+
+      <ul>
+      <% sample.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.text_field :image, id: :sample_image %>
+  </div>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :sample_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :star %>
+    <%= form.number_field :star, id: :sample_star %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :sample_description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

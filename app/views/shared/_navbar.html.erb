@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Delivery</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -26,7 +26,7 @@
       <li class="nav-item">
         <a class="nav-link disabled" href="#">Disabled</a>
       </li> -->
-    </ul>
+ <!--   </ul>
     <form class="form-inline my-2 my-lg-0">
     <% if(!user_signed_in?)%>
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><%= link_to  "Login", new_user_session_path %></button>
@@ -39,4 +39,21 @@
   </div>
     </form>
   </div>
-</nav>
+</nav> -->
+<nav>
+    <div class="nav-wrapper">
+      <a href="#!" class="brand-logo"><%= link_to "Home", pages_home_path, class: "brand-logo"%></a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li><%= link_to "Delivers", delivers_path %></li>
+        <li><%= link_to "Location", pages_location_path %></li>
+      </ul>
+    </div>
+  </nav>
+
+  <ul class="sidenav" id="mobile-demo">
+    <li><a href="sass.html">Sass</a></li>
+    <li><a href="badges.html">Components</a></li>
+    <li><a href="collapsible.html">Javascript</a></li>
+    <li><a href="mobile.html">Mobile</a></li>
+  </ul>

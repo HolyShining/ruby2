@@ -1,0 +1,37 @@
+<%= form_with(model: deliver, local: true) do |form| %>
+  <% if deliver.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(deliver.errors.count, "error") %> prohibited this deliver from being saved:</h2>
+
+      <ul>
+      <% deliver.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :deliver_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address, id: :deliver_address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :objectlist %>
+    <%= form.text_area :objectlist, id: :deliver_objectlist %>
+  </div>
+
+  <div class="field">
+    <%= form.label :delivers %>
+    <%= form.check_box :delivers, id: :deliver_delivers %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
