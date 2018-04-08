@@ -7,8 +7,9 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script>
-      var elem = document.querySelector('.sidenav');
-      var instance = M.Sidenav.init(elem, options);
+    $(document).ready(function(){
+      $('select').formSelect();
+    });
     </script>
   </head>
 

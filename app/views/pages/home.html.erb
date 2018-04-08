@@ -1,6 +1,7 @@
 <br>
 <% if(user_signed_in?) %>
 <div class="row">
+<% if current_user.role == 'operator' %>
     <% @delivers.each do |deliver| %>
     <div class="col s6 m6">
       <div class="card blue-grey darken-1">
@@ -18,6 +19,7 @@
         </div>
       </div>
     </div>
+    <% end %>
     <% end %>
 </div>
 <%= render "shared/floating_button"%>
