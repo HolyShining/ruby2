@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :delivers
-  resources :samples
   
   root 'pages#home'
 
