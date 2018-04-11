@@ -15,7 +15,9 @@ Rails.application.routes.draw do
 
   post 'delivers/done'
 
-  devise_for :users
+  post 'delivers/approve'
+
+  devise_for :users, :controllers => { registrations: 'registrations' }
   get 'pages/home'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -1,3 +1,9 @@
+    <script>
+    $(document).ready(function(){
+      $('select').formSelect();
+    });
+    </script>
+<div class="col s6">
 <%= form_with(model: deliver, local: true) do |form| %>
   <% if deliver.errors.any? %>
     <div id="error_explanation">
@@ -23,14 +29,26 @@
 
   <div class="field">
     <%= form.label :objectlist %>
-    <%= form.text_area :objectlist, id: :deliver_objectlist %>
+    <%= form.text_area :objectlist %>
+  </div>
+  <div class="field">
+    <%= form.label 'Select driver' %>
+    <%= form.select :driver do %>
+    <% @user.each do |driver| %>
+      <% if driver.role == 'driver' %>
+      <%= content_tag(:option, "#{driver.name}", value: driver.id) %>
+      <% end %>
+    <% end %>
+    <% end %>
   </div>
 
   <div class="field">
-    <%= form.hidden_field :is_deliverd, :value => 'false' %>
+    <%= form.hidden_field :is_deliverd, :value => false %>
+    <%= form.hidden_field :approved, :value => false %>
   </div>
-
+  <br>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "waves-effect waves-light btn blue lighten-2" do %>
+    <% end %>
   </div>
 <% end %>

@@ -1,5 +1,5 @@
 class DeliversController < ApplicationController
-  before_action :set_deliver, only: [:show, :edit, :update, :destroy,:done]
+  before_action :set_deliver, only: [:show, :edit, :update, :destroy,:done, :approve]
 
   # GET /delivers
   # GET /delivers.json
@@ -10,22 +10,25 @@ class DeliversController < ApplicationController
   # GET /delivers/1
   # GET /delivers/1.json
   def show
+    @user = User.all
   end
 
   # GET /delivers/new
   def new
     @deliver = Deliver.new
+    @user = User.all
   end
 
   # GET /delivers/1/edit
   def edit
+    @user = User.all
   end
 
   # POST /delivers
   # POST /delivers.json
   def create
     @deliver = Deliver.new(deliver_params)
-
+    @user = User.all
     respond_to do |format|
       if @deliver.save
         format.html { redirect_to @deliver, notice: 'Deliver was successfully created.' }
@@ -40,6 +43,7 @@ class DeliversController < ApplicationController
   # PATCH/PUT /delivers/1
   # PATCH/PUT /delivers/1.json
   def update
+    @user = User.all
     respond_to do |format|
       if @deliver.update(deliver_params)
         Rails.logger.debug @deliver
@@ -63,9 +67,15 @@ class DeliversController < ApplicationController
   end
 
   def done
-    Rails.logger.debug @deliver.is_deliverd
     @deliver.is_deliverd = true
     @deliver.save
+    redirect_back(fallback_location: root_path)
+  end
+
+  def approve
+    @deliver.approved = true
+    @deliver.save
+    redirect_back(fallback_location: root_path)
   end
 
   private
@@ -76,6 +86,6 @@ class DeliversController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def deliver_params
-      params.require(:deliver).permit(:name, :address, :objectlist, :is_deliverd)
+      params.require(:deliver).permit(:name, :address, :objectlist, :is_deliverd, :driver, :approved)
     end
 end
