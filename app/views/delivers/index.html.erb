@@ -2,6 +2,36 @@
 
 <h1>Delivers</h1>
 
+<% if current_user.role == 'driver' %>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+
+
+  <tbody>
+    <% @delivers.each do |deliver| %>
+    <% if deliver.driver.to_i == current_user.id %>
+      <tr class="<%= deliver.state == 'pending' ? 'blue lighten-2' : '' %> 
+                 <%= deliver.state == 'done' ? 'blue-grey darken-1' : '' %> 
+                 <%= deliver.state == 'approved' ? 'teal lighten-2' : '' %>
+                 <%= deliver.state == 'cancel' ? 'red lighten-2' : '' %>">
+        <td><%= deliver.name %></td>
+        <td><%= deliver.address %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<% end %>
+
+<% if current_user.role == 'operator' %>
 <table>
   <thead>
     <tr>
@@ -12,22 +42,65 @@
     </tr>
   </thead>
 
+
+
   <tbody>
     <% @delivers.each do |deliver| %>
-      <tr class="<%= deliver.is_deliverd ? 'teal lighten-2' : '' %>">
+      <tr class="<%= deliver.state == 'pending' ? 'blue lighten-2' : '' %> 
+                 <%= deliver.state == 'done' ? 'blue-grey darken-1' : '' %> 
+                 <%= deliver.state == 'approved' ? 'teal lighten-2' : '' %>
+                 <%= deliver.state == 'cancel' ? 'red lighten-2' : '' %>">
         <td><%= deliver.name %></td>
         <td><%= deliver.address %></td>
         <td><%= User.find_by_id(deliver.driver.to_i).name %></td>
         <td><%= link_to 'Show Details', deliver,class: "waves-effect waves-light btn blue lighten-2" %></td>
+        <td>
+        <% if deliver.state == 'approved'%>
+        <%= link_to 'Done', delivers_done_path("id"=>deliver), method: :post, class: "waves-effect waves-light btn blue lighten-2" %>
+        <% end %>
+        <% if deliver.state == 'cancel'%>
+        <%= link_to 'Approve', delivers_done_path("id"=>deliver), method: :post, class: "waves-effect waves-light btn blue lighten-2" %>
+        <% end %>
+        </td>&nbsp;
         <td><%= link_to 'Edit', edit_deliver_path(deliver),class: "waves-effect waves-light btn blue lighten-2" %></td>
         <td><%= link_to 'Delete', deliver, method: :delete, data: { confirm: 'Are you sure?' },class: "waves-effect waves-light btn blue lighten-2" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<%= render "shared/floating_button"%>
+<% end %>
+
+<% if current_user.role == 'accounter' %>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Objectlist</th>
+      <th>Driver name</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+
+
+  <tbody>
+    <% @delivers.each do |deliver| %>
+      <tr class="">
+        <td><%= deliver.name %></td>
+        <td><%= deliver.address %></td>
+        <td><%= deliver.objectlist %></td>
+        <td><%= User.find_by_id(deliver.driver.to_i).name %></td>
+        <td><%= deliver.state %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
 
 <br>
 
 <!-- <%= link_to 'New Deliver', new_deliver_path %> -->
 
-<%= render "shared/floating_button"%>
+

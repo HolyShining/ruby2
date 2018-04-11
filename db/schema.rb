@@ -10,17 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180411132756) do
+ActiveRecord::Schema.define(version: 20180411183115) do
 
   create_table "delivers", force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.text "objectlist"
-    t.boolean "is_deliverd"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "driver"
-    t.boolean "approved"
+    t.string "state"
   end
 
   create_table "samples", force: :cascade do |t|

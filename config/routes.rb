@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   post 'delivers/approve'
 
+  post 'delivers/cancel'
+
   devise_for :users, :controllers => { registrations: 'registrations' }
   get 'pages/home'
 

@@ -1,5 +1,5 @@
 class DeliversController < ApplicationController
-  before_action :set_deliver, only: [:show, :edit, :update, :destroy,:done, :approve]
+  before_action :set_deliver, only: [:show, :edit, :update, :destroy,:done, :approve, :cancel]
 
   # GET /delivers
   # GET /delivers.json
@@ -67,13 +67,19 @@ class DeliversController < ApplicationController
   end
 
   def done
-    @deliver.is_deliverd = true
+    @deliver.state = 'done'
     @deliver.save
     redirect_back(fallback_location: root_path)
   end
 
   def approve
-    @deliver.approved = true
+    @deliver.state = 'approved'
+    @deliver.save
+    redirect_back(fallback_location: root_path)
+  end
+
+  def cancel
+    @deliver.state = 'cancel'
     @deliver.save
     redirect_back(fallback_location: root_path)
   end
@@ -86,6 +92,6 @@ class DeliversController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def deliver_params
-      params.require(:deliver).permit(:name, :address, :objectlist, :is_deliverd, :driver, :approved)
+      params.require(:deliver).permit(:name, :address, :objectlist, :is_deliverd, :driver, :approved, :state)
     end
 end

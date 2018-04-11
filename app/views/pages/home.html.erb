@@ -5,7 +5,10 @@
     <% @delivers.each do |deliver| %>
       <% if current_user.id == deliver.driver.to_i %>
         <div class="col s6 m6">
-          <div class="card <%= !deliver.approved && !deliver.is_deliverd ? 'blue lighten-2' : '' %> <%= deliver.is_deliverd ? 'blue-grey darken-1' : '' %> <%= !deliver.is_deliverd && deliver.approved ? 'teal lighten-2' : '' %>"> 
+          <div class="card <%= deliver.state == 'pending' ? 'blue lighten-2' : '' %> 
+                           <%= deliver.state == 'done' ? 'blue-grey darken-1' : '' %> 
+                           <%= deliver.state == 'approved' ? 'teal lighten-2' : '' %>
+                           <%= deliver.state == 'cancel' ? 'red lighten-2' : '' %>"> 
             <div class="card-content white-text">
               <span class="card-title"><%= deliver.name %></span>
               Content: <br/>
@@ -15,11 +18,11 @@
               <p><%= deliver.address %></p>
             </div>
             <div class="card-action">
-            <% if deliver.approved && !deliver.is_deliverd %>
-              <%= link_to 'Done', delivers_done_path("id"=>deliver), method: :post %>
-            <% end %>
-            <% if !deliver.approved %>
+            <% if deliver.state == 'pending' %>
               <%= link_to 'Approve', delivers_approve_path("id"=>deliver), method: :post %>
+            <% end %>
+            <% if deliver.state == 'approved' %>
+              <%= link_to 'Cancel', delivers_cancel_path("id"=>deliver), method: :post %>
             <% end %>
             &nbsp;
             </div>
@@ -29,7 +32,7 @@
     <% end %>
 <% else %>
   <script type="text/javascript">
-    window.location.href="/delivers"  // put your correct path in a string here
+    window.location.href="/delivers"
   </script>
 <% end %>
 </div>
