@@ -18,9 +18,9 @@
         <td><%= deliver.name %></td>
         <td><%= deliver.address %></td>
         <td><%= User.find_by_id(deliver.driver.to_i).name %></td>
-        <!--<td><%= button_to 'Show details', deliver %></td>-->
+        <td><%= link_to 'Show Details', deliver,class: "waves-effect waves-light btn blue lighten-2" %></td>
         <td><%= link_to 'Edit', edit_deliver_path(deliver),class: "waves-effect waves-light btn blue lighten-2" %></td>
-        <td><%= button_to 'Delete', deliver, method: :delete, data: { confirm: 'Are you sure?' },class: "waves-effect waves-light btn blue lighten-2" %></td>
+        <td><%= link_to 'Delete', deliver, method: :delete, data: { confirm: 'Are you sure?' },class: "waves-effect waves-light btn blue lighten-2" %></td>
       </tr>
     <% end %>
   </tbody>

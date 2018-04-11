@@ -3,33 +3,29 @@
 <div class="row">
 <% if current_user.role == 'driver' %>
     <% @delivers.each do |deliver| %>
-    <% if current_user.id == deliver.driver.to_i %>
-    <div class="col s4 m4">
-    <% unless deliver.approved %>
-      <div class="card #0288d1 light-blue darken-2">
-    <% else %>
-      <div class="card <%= !deliver.is_deliverd ? 'teal lighten-2' : 'blue-grey darken-1' %>">
-    <% end %>
-        <div class="card-content white-text">
-          <span class="card-title"><%= deliver.name %></span>
-          Content: <br/>
-          <p><%= deliver.objectlist %></p>
-          <hr>
-          Address: <br/>
-          <p><%= deliver.address %></p>
+      <% if current_user.id == deliver.driver.to_i %>
+        <div class="col s6 m6">
+          <div class="card <%= !deliver.approved && !deliver.is_deliverd ? 'blue lighten-2' : '' %> <%= deliver.is_deliverd ? 'blue-grey darken-1' : '' %> <%= !deliver.is_deliverd && deliver.approved ? 'teal lighten-2' : '' %>"> 
+            <div class="card-content white-text">
+              <span class="card-title"><%= deliver.name %></span>
+              Content: <br/>
+              <p><%= deliver.objectlist %></p>
+              <hr>
+              Address: <br/>
+              <p><%= deliver.address %></p>
+            </div>
+            <div class="card-action">
+            <% if deliver.approved && !deliver.is_deliverd %>
+              <%= link_to 'Done', delivers_done_path("id"=>deliver), method: :post %>
+            <% end %>
+            <% if !deliver.approved %>
+              <%= link_to 'Approve', delivers_approve_path("id"=>deliver), method: :post %>
+            <% end %>
+            &nbsp;
+            </div>
+          </div>
         </div>
-        <% unless deliver.is_deliverd %>
-        <div class="card-action">
-        <% if deliver.approved %>
-          <%= link_to 'Done', delivers_done_path("id"=>deliver), method: :post %>
-        <% else %>
-          <%= link_to 'Approve', delivers_approve_path("id"=>deliver), method: :post %>
-        </div>
-        <% end %>
-        <% end %>
-      </div>
-    </div>
-    <% end %>
+      <% end %>
     <% end %>
 <% else %>
   <script type="text/javascript">
@@ -39,18 +35,18 @@
 </div>
 <% else %>
 <div class="row">
-    <div class="col s12 m6">
-      <div class="card red accent-2 darken-1">
-        <div class="card-content white-text">
-          <span class="card-title">Error!</span>
-          <p>You need login before action</p>
-        </div>
-        <div class="card-action">
-          <%= link_to  "Login", new_user_session_path %>
-        </div>
+  <div class="col s12 m6">
+    <div class="card red accent-2 darken-1">
+      <div class="card-content white-text">
+        <span class="card-title">Error!</span>
+        <p>You need login before action</p>
+       </div>
+      <div class="card-action">
+        <%= link_to  "Login", new_user_session_path %>
       </div>
     </div>
   </div>
+</div>
 <% end %>
 
 
