@@ -72,7 +72,7 @@
 <% end %>
 
 <% if current_user.role == 'accounter' %>
-<table>
+<table class="striped">
   <thead>
     <tr>
       <th>Name</th>
@@ -83,11 +83,9 @@
     </tr>
   </thead>
 
-
-
   <tbody>
     <% @delivers.each do |deliver| %>
-      <tr class="">
+      <tr>
         <td><%= deliver.name %></td>
         <td><%= deliver.address %></td>
         <td><%= deliver.objectlist %></td>
@@ -101,6 +99,7 @@
 
 <br>
 
+<%= will_paginate @delivers %>
 <!-- <%= link_to 'New Deliver', new_deliver_path %> -->
 
 

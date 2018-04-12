@@ -36,6 +36,8 @@ gem 'devise'
 gem 'materialize-sass', '~> 1.0.0.beta'
 # Notification system
 gem 'toastr-rails'
+# Pagination
+gem 'will_paginate', '~> 3.1.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
