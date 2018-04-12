@@ -72,7 +72,9 @@
 <% end %>
 
 <% if current_user.role == 'accounter' %>
-<%= link_to "Import Table", delivers_path(format: "csv"), class: "waves-effect waves-light btn blue lighten-2" %>
+<%= link_to "Import All Table", delivers_path(format: "csv"), class: "waves-effect waves-light btn blue lighten-2" %>
+<%= select_tag :per_page, options_for_select([10,20,50], params[:per_page].to_i),
+       :onchange => "if(this.value){window.location='?per_page='+this.value;}" %>
 <table class="striped">
   <thead>
     <tr>

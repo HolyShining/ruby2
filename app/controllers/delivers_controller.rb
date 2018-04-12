@@ -4,7 +4,8 @@ class DeliversController < ApplicationController
   # GET /delivers
   # GET /delivers.json
   def index
-    @delivers = Deliver.all.paginate(:page => params[:page], :per_page => 10)
+    @per_page = params[:per_page] || Deliver.per_page || 20
+    @delivers = Deliver.all.paginate(:page => params[:page], :per_page => @per_page)
     respond_to do |format|
       format.html
       format.csv { send_data @delivers.to_csv }
