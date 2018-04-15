@@ -11,18 +11,18 @@
                            <%= deliver.state == 'cancel' ? 'red lighten-2' : '' %>"> 
             <div class="card-content white-text">
               <span class="card-title"><%= deliver.name %></span>
-              Content: <br/>
+              Номенклатура: <br/>
               <p><%= deliver.objectlist %></p>
               <hr>
-              Address: <br/>
+              Адреса: <br/>
               <p><%= deliver.address %></p>
             </div>
             <div class="card-action">
             <% if deliver.state == 'pending' %>
-              <%= link_to 'Approve', delivers_approve_path("id"=>deliver), method: :post %>
+              <%= link_to 'Взяти замовлення', delivers_approve_path("id"=>deliver), method: :post %>
             <% end %>
             <% if deliver.state == 'approved' %>
-              <%= link_to 'Cancel', delivers_cancel_path("id"=>deliver), method: :post %>
+              <%= link_to 'Відмінити', delivers_cancel_path("id"=>deliver), method: :post %>
             <% end %>
             &nbsp;
             </div>
@@ -41,11 +41,11 @@
   <div class="col s12 m6">
     <div class="card red accent-2 darken-1">
       <div class="card-content white-text">
-        <span class="card-title">Error!</span>
-        <p>You need login before action</p>
+        <span class="card-title">Помилка!</span>
+        <p>Для початку роботи потрібно ввійти</p>
        </div>
       <div class="card-action">
-        <%= link_to  "Login", new_user_session_path %>
+        <%= link_to  "Ввійти", new_user_session_path %>
       </div>
     </div>
   </div>

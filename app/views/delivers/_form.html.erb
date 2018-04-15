@@ -13,21 +13,21 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <label>Назва доставки:</label>
     <%= form.text_field :name, id: :deliver_name %>
   </div>
 
   <div class="field">
-    <%= form.label :address %>
+    <label>Кінцева адреса:</label>
     <%= form.text_field :address, id: "autolocation" %>
   </div>
 
   <div class="field">
-    <%= form.label :objectlist %>
+    <label>Номенклатура:</label>
     <%= form.text_area :objectlist, class: "materialize-textarea" %>
   </div>
   <div class="field">
-    <%= form.label 'Select driver' %>
+    <%= form.label 'Оберіть водія:' %>
     <%= form.select :driver do %>
     <% @user.each do |driver| %>
       <% if driver.role == 'driver' %>
@@ -43,7 +43,7 @@
   </div>
   <br>
   <div class="actions">
-    <%= form.submit class: "waves-effect waves-light btn blue lighten-2" do %>
+    <%= form.submit "Створити Доставку", class: "waves-effect waves-light btn blue lighten-2" do %>
     <% end %>
   </div>
 <% end %>

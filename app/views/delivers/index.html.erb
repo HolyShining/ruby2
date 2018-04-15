@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Delivers</h1>
+<h1>Доставки</h1>
 
 <% if current_user.role == 'driver' %>
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Address</th>
+      <th>Назва</th>
+      <th>Адреса</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -35,9 +35,9 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Driver</th>
+      <th>Назва</th>
+      <th>Адреса</th>
+      <th>Водій</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -53,17 +53,17 @@
         <td><%= deliver.name %></td>
         <td><%= deliver.address %></td>
         <td><%= User.find_by_id(deliver.driver.to_i).name %></td>
-        <td><%= link_to 'Show Details', deliver,class: "waves-effect waves-light btn blue lighten-2" %></td>
+        <td><%= link_to 'Показати деталі', deliver,class: "waves-effect waves-light btn blue lighten-2" %></td>
         <td>
         <% if deliver.state == 'approved'%>
-        <%= link_to 'Done', delivers_done_path("id"=>deliver), method: :post, class: "waves-effect waves-light btn blue lighten-2" %>
+        <%= link_to 'Виконано', delivers_done_path("id"=>deliver), method: :post, class: "waves-effect waves-light btn blue lighten-2" %>
         <% end %>
         <% if deliver.state == 'cancel'%>
-        <%= link_to 'Approve', delivers_done_path("id"=>deliver), method: :post, class: "waves-effect waves-light btn blue lighten-2" %>
+        <%= link_to 'Відмінити', delivers_done_path("id"=>deliver), method: :post, class: "waves-effect waves-light btn blue lighten-2" %>
         <% end %>
         </td>&nbsp;
-        <td><%= link_to 'Edit', edit_deliver_path(deliver),class: "waves-effect waves-light btn blue lighten-2" %></td>
-        <td><%= link_to 'Delete', deliver, method: :delete, data: { confirm: 'Are you sure?' },class: "waves-effect waves-light btn blue lighten-2" %></td>
+        <td><%= link_to 'Редагувати', edit_deliver_path(deliver),class: "waves-effect waves-light btn blue lighten-2" %></td>
+        <td><%= link_to 'Видалити', deliver, method: :delete, data: { confirm: 'Ви впевнені?' },class: "waves-effect waves-light btn blue lighten-2" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -72,17 +72,17 @@
 <% end %>
 
 <% if current_user.role == 'accounter' %>
-<%= link_to "Import All Table", delivers_path(format: "csv"), class: "waves-effect waves-light btn blue lighten-2" %>
+<%= link_to "Імпортувати таблицю", delivers_path(format: "csv"), class: "waves-effect waves-light btn blue lighten-2" %>
 <%= select_tag :per_page, options_for_select([10,20,50], params[:per_page].to_i),
        :onchange => "if(this.value){window.location='?per_page='+this.value;}" %>
 <table class="striped">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Objectlist</th>
-      <th>Driver name</th>
-      <th>Status</th>
+      <th>Ім'я</th>
+      <th>Адреса</th>
+      <th>Номенклатура</th>
+      <th>Водій</th>
+      <th>Статус</th>
     </tr>
   </thead>
 

@@ -1,16 +1,16 @@
 <nav>
     <div class="nav-wrapper blue lighten-2">
-      <%= link_to "Delivery App", pages_home_path, class: "brand-logo center"%>
+      <%= link_to "Доставка", pages_home_path, class: "brand-logo center"%>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <% if(user_signed_in?) %>
-        <li>Logged as <%= current_user.name %> |</li>
+        <li>Ви ввійшли як <%= current_user.name %> |</li>
         <% if current_user.role == 'driver' %>
-        <li><%= link_to "Table", delivers_path%></li>
+        <li><%= link_to "Таблиця", delivers_path%></li>
         <!--<li><%= link_to "Registrate New User", new_user_registration_path %>-->
         <% end %>
-        <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+        <li><%= link_to "Вийти", destroy_user_session_path, method: :delete %></li>
         <% else %>
-        <li><%= link_to "Login", new_user_session_path %></li>
+        <li><%= link_to "Ввійти", new_user_session_path %></li>
         <% end %>
       </ul>
     </div>

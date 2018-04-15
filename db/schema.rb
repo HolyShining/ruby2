@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20180411183115) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "delivers", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -20,24 +23,6 @@ ActiveRecord::Schema.define(version: 20180411183115) do
     t.datetime "updated_at", null: false
     t.string "driver"
     t.string "state"
-  end
-
-  create_table "samples", force: :cascade do |t|
-    t.string "image"
-    t.string "title"
-    t.integer "star"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "tasks", force: :cascade do |t|
-    t.string "name"
-    t.text "summary"
-    t.string "address"
-    t.boolean "is_delivered"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
